@@ -1,0 +1,43 @@
+---
+title: "My Report"
+date: today
+author: H24095031
+format:
+ pdf:
+    include-in-header:
+      - text: |
+         \usepackage{setspace,relsize}
+mainfont: "Microsoft JhengHei UI"
+toc: true
+---
+
+```{r}
+
+# Load necessary libraries
+library(tidyverse)
+library(Rtsne)
+library(stats)
+library(readr)
+
+# Load the MNIST dataset
+mnist_data <-read.csv("C:/Users/jonat/OneDrive/Desktop/MNIST_train.csv")
+
+
+# Separate labels and features
+labels <- mnist_data$label  # Assuming there's a 'label' column for digit classes
+features <- mnist_data %>% select(-label)
+
+# Remove near-zero variance columns
+features <- features %>% select_if(~var(.) > 0)
+
+# Apply PCA
+pca_result <- prcomp(features, scale. = TRUE)
+pca_data <- data.frame(pca_result$x[, 1:2], label = as.factor(labels))
+
+# Visualize PCA
+ggplot(pca_data, aes(x = PC1, y = PC2, color = label)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "PCA of MNIST Dataset")
+
+```
+The PCA plot of the MNIST dataset shows considerable overlap between digit classes, indicating that the first two principal components alone do not fully separate the digits. While some digits like '0' and '1' form visible clusters, they are intermingled with others, highlighting PCA's limitation in capturing non-linear relationships. More advanced techniques, such as t-SNE, may be needed for better clustering and clearer differentiation between classes.
