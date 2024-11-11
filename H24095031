@@ -40,4 +40,8 @@ ggplot(pca_data, aes(x = PC1, y = PC2, color = label)) +
   labs(title = "PCA of MNIST Dataset")
 
 ```
-The PCA plot of the MNIST dataset shows considerable overlap between digit classes, indicating that the first two principal components alone do not fully separate the digits. While some digits like '0' and '1' form visible clusters, they are intermingled with others, highlighting PCA's limitation in capturing non-linear relationships. More advanced techniques, such as t-SNE, may be needed for better clustering and clearer differentiation between classes.
+The PCA plot of the MNIST dataset shows considerable overlap between digit classes, 
+indicating that the first two principal components alone do not fully separate the digits. 
+While some digits like '0' and '1' form visible clusters, they are intermingled with others, 
+highlighting PCA's limitation in capturing non-linear relationships. More advanced techniques, such as t-SNE, 
+may be needed for better clustering and clearer differentiation between classes.
